@@ -75,7 +75,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
   fi
   if [ "$BOOL_UPDATE_MONGOSH" == "Yes" ]; then
     wget -qO- "https://downloads.mongodb.com/compass/mongosh-${ONLINE_MONGOSH}-linux-x64.tgz" |
-      tar -xvz -C $INSTALL_FOLDER/bin/ --strip 2 --wildcards */bin/*
+      tar -xvz -C $INSTALL_FOLDER/bin/ --strip 2
   fi
   if [ "$BOOL_UPDATE_MONGODB" == "Yes" ]; then
     wget -qO- "https://downloads.mongodb.com/linux/mongodb-linux-x86_64-enterprise-${LINUX}-${ONLINE_MONGODB}.tgz" |
