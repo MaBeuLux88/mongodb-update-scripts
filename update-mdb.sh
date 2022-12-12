@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
 INSTALL_FOLDER="/home/polux/Softwares"
-LINUX="debian10"
-SITE=$(wget -qO- https://www.mongodb.com/try/download/enterprise | tr -d '\n')
+LINUX="debian11"
+SITE_ENTERPRISE=$(wget -qO- https://www.mongodb.com/try/download/enterprise | tr -d '\n')
+SITE_TOOLS=$(wget -qO- https://www.mongodb.com/try/download/tools | tr -d '\n')
 COMPASS_VERSIONS=$(curl -sH "Accept: application/vnd.github.v3+json" https://api.github.com/repos/mongodb-js/compass/releases)
 
 CURRENT_MDB_COMPASS=$(dpkg -l | grep "mongodb-compass " | tr -s ' ' '\t' | cut -f3)
@@ -25,9 +26,9 @@ COMPASS_BETA_DEB=$(echo "$COMPASS_URL_BETA" | xargs basename)
 
 ONLINE_COMPASS_PROD=$(echo "$COMPASS_URL_PROD" | grep -oP '\d+\.\d+\.\d+' | head -1)
 ONLINE_COMPASS_BETA=$(echo "$COMPASS_URL_BETA" | grep -oP '\d+\.\d+\.\d+-beta\.\d+' | head -1)
-ONLINE_MONGOSH=$(echo "$SITE" | grep -oP '<div id="mongodb-shell".*?</mdb-input>' | grep -oP 'value="[^"]*"' | grep -oP '\d+\.\d+\.\d+')
-ONLINE_MONGODB=$(echo "$SITE" | grep -oP '<div id="mongodb-enterprise-server".*?</mdb-input>' | grep -oP 'value="[^"]*"' | grep -oP '\d+\.\d+\.\d+')
-ONLINE_TOOLS=$(echo "$SITE" | grep -oP '<div id="mongodb-database-tools".*?</mdb-input>' | grep -oP 'value="[^"]*"' | grep -oP '\d+\.\d+\.\d+')
+ONLINE_MONGOSH=$(echo "$SITE_TOOLS" | grep -oP '<div id="shell".*?</button>' | grep -oP '\d+\.\d+\.\d+')
+ONLINE_MONGODB=$(echo "$SITE_ENTERPRISE" | grep -oP '<div id="server".*?</button>' | grep -oP '\d+\.\d+\.\d+')
+ONLINE_TOOLS=$(echo "$SITE_TOOLS" | grep -oP '<div id="db-tools".*?</button>' | grep -oP '\d+\.\d+\.\d+')
 
 BOOL_UPDATE_MDB_COMPASS=$([ "$CURRENT_MDB_COMPASS" == "$ONLINE_COMPASS_PROD" ] && echo "No" || echo "Yes")
 BOOL_UPDATE_MDB_COMPASS_BETA=$([ "$CURRENT_MDB_COMPASS_BETA" == "$ONLINE_COMPASS_BETA" ] && echo "No" || echo "Yes")

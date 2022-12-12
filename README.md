@@ -4,7 +4,7 @@ MongoDB script that I use to update my MongoDB binaries.
 
 ## Prerequisites
 
-The download URLs I use are currently for **Debian 10 (buster) x86_64**. If this is not your target, then go to [MongoDB's download](https://www.mongodb.com/try/download) page and update the URLs.
+The download URLs I use are currently for **Debian 11 (buster) x86_64**. If this is not your target, then go to [MongoDB's download](https://www.mongodb.com/try/download) page and update the URLs.
 
 Update the `INSTALL_FOLDER` variable at the top.
 
@@ -28,3 +28,4 @@ You will need to update your symbolic links or `$PATH` after this script to poin
 Read the script before executing it as it could potentially overwrite stuff on your computer or delete deb files.
 
 Use at your own risk.
+
